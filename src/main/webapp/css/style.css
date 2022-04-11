@@ -56,6 +56,10 @@ body {
     height: 375px;
 }
 
+#profile-form {
+    height: 425px;
+}
+
 .card-img {
     width: 100%;
     height: 100%;
@@ -66,7 +70,9 @@ body {
 }
 
 footer {
+    position: absolute;
     background: black;
+    bottom: 0;
     width: 100%;
     height: 150px;
 }
