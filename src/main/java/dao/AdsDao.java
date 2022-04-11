@@ -36,10 +36,75 @@ public class AdsDao implements Ads{
     }
 
     @Override
+    public List<Ad> search(String searchQuery) {
+        String query = "SELECT * FROM ads WHERE title LIKE ? OR console LIKE ?";
+        String queryWildCard = "%" + searchQuery + "%";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, queryWildCard);
+            stmt.setString(2, queryWildCard);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error searching for ads.", e);
+        }
+    }
+
+    @Override
+    public List<Ad> usersAds(Long userId) {
+        String query = "SELECT * FROM ads WHERE user_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving user's ads.", e);
+        }
+    }
+
+    @Override
+    public List<Ad> lastFiveAds() {
+        String query = "SELECT * FROM ads ORDER BY id DESC LIMIT 5";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving last five ads.", e);
+        }
+    }
+
+    @Override
+    public Ad findAdById(Long adId) {
+        String query = "SELECT * FROM ads WHERE id = ?";
+        Ad ad = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, adId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ad = new Ad(
+                        rs.getLong("id"),
+                        rs.getLong("user_id"),
+                        rs.getString("title"),
+                        rs.getString("console"),
+                        rs.getString("description"),
+                        rs.getString("image_url"),
+                        rs.getString("post_type")
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding an ad by that id.", e);
+        }
+        return ad;
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, console, description, image_url, post_type) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            String query = "INSERT INTO ads(user_id, title, console, description, image_url, post_type) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getConsole());
@@ -56,10 +121,27 @@ public class AdsDao implements Ads{
     }
 
     @Override
+    public int update(Ad ad) {
+        String query = "UPDATE ads SET title = ?, console = ?, description = ?, image_url = ?, post_type = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getConsole());
+            stmt.setString(3, ad.getDescription());
+            stmt.setString(4, ad.getImageUrl());
+            stmt.setString(5, ad.getImageUrl());
+            stmt.setLong(6, ad.getId());
+            return stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating ad.", e);
+        }
+    }
+
+    @Override
     public boolean delete(Long adId) {
         try {
-            String deleteQuery = "DELETE FROM ads WHERE id = ?";
-            PreparedStatement stmt = connection.prepareStatement(deleteQuery);
+            String query = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, adId);
             return stmt.execute();
         } catch (SQLException e) {
