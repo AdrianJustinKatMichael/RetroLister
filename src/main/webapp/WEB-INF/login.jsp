@@ -43,6 +43,8 @@
                 <a class="pt-2 text-center">Forgot Password?</a>
 
             </form>
+            <form id="register-box" class="col-5 bg-light d-flex flex-column justify-content-center px-5 rounded">
+            </form>
         </div>
 
         <%@ include file="/WEB-INF/partials/foot.jsp" %>
