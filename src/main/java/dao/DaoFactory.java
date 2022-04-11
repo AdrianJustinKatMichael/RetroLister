@@ -1,4 +1,4 @@
-package com.codeup.retrolister.dao;
+package dao;
 
 public class DaoFactory {
     private static Users usersDao;
@@ -6,7 +6,7 @@ public class DaoFactory {
 
     public static Users getUsersDao() {
         if (usersDao == null) {
-            usersDao = new MySQLUsersDao(config);
+            usersDao = new UsersDao(config);
         }
         return usersDao;
     }

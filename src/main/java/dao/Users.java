@@ -1,6 +1,6 @@
-package com.codeup.retrolister.dao;
+package dao;
 
-import com.codeup.retrolister.models.User;
+import models.User;
 
 public interface Users {
     User findByUsername(String username);

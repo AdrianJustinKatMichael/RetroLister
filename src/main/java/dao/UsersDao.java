@@ -1,14 +1,14 @@
-package com.codeup.retrolister.dao;
+package dao;
 
-import com.codeup.retrolister.models.User;
+import models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 
-public class MySQLUsersDao implements Users {
+public class UsersDao implements Users {
     private Connection connection;
 
-    public MySQLUsersDao(Config config) {
+    public UsersDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
