@@ -16,15 +16,15 @@
         <title>Registration Page</title>
 
         <%@ include file="/WEB-INF/partials/head.jsp" %>
-        <%@ include file="/WEB-INF/partials/style.jsp" %>
+        <style>
+            <%@ include file="/WEB-INF/partials/style.jsp" %>
+        </style>
     </head>
     <body>
-        <%@ include file="/WEB-INF/partials/navbar.jsp" %>
+        <%@ include file="/WEB-INF/partials/navbar-login.jsp" %>
 
         <div class="container d-flex justify-content-center align-items-center">
             <form id="register-form" class="col-5 bg-light d-flex flex-column justify-content-center p-5 rounded">
-
-                <h1 class="text-center pb-4">Sign Up</h1>
 
                 <div class="input-group mb-4">
                     <span class="input-group-text"><i class="fa fa-user"></i></span>
@@ -43,10 +43,10 @@
 
                 <div class="input-group mb-4">
                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                    <input type="password" id="password-repeat" name="password-repeat" class="form-control" placeholder="Repeat Password">
+                    <input type="password" id="password-confirm" name="password-confirm" class="form-control" placeholder="Confirm Password">
                 </div>
 
-                <div class="d-flex justify-content-center pt-3">
+                <div class="d-flex justify-content-end pt-3">
                     <button type="submit" class="btn btn-dark" formaction="/register" formmethod="post">Register</button>
                 </div>
 
