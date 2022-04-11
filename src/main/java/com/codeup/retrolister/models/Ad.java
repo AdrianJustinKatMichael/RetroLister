@@ -1,4 +1,4 @@
-package models;
+package com.codeup.retrolister.models;
 
 public class Ad {
     private long id;

@@ -1,4 +1,4 @@
-package util;
+package com.codeup.retrolister.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
