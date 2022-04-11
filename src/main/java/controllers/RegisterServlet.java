@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        // Add User to Model
+        // Add User to database
         String hashedPassword = Password.hash(password);
         User userToInsert = new User(username, email, hashedPassword);
         DaoFactory.getUsersDao().insert(userToInsert);

@@ -9,6 +9,15 @@ public class Ad {
     private String imageUrl;
     private String postType;
 
+    public Ad(long userId,String title, String console, String description, String imageUrl, String postType) {
+        this.userId = userId;
+        this.title = title;
+        this.console = console;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.postType = postType;
+    }
+
     public Ad(long id, long userId, String title, String console, String description, String imageUrl, String postType) {
         this.id = id;
         this.userId = userId;
