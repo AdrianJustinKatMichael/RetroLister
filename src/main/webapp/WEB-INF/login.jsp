@@ -16,21 +16,17 @@
         <title>Login Page</title>
 
         <%@ include file="/WEB-INF/partials/head.jsp" %>
-        <%@ include file="/WEB-INF/partials/style.jsp" %>
+        <style>
+            <%@ include file="/WEB-INF/partials/style.jsp" %>
+        </style>
     </head>
     <body>
-        <%@ include file="/WEB-INF/partials/navbar.jsp" %>
+        <%@ include file="/WEB-INF/partials/navbar-login.jsp" %>
 
         <div class="container d-flex justify-content-center align-items-center">
             <form id="login-form" class="col-5 bg-light d-flex flex-column justify-content-center px-5 rounded">
 
-                <h1 class="text-center pb-3">Login</h1>
-
-                <div class="d-flex justify-content-center pb-4">
-                    <img id="avatar" class="rounded-circle" src="/img/avatar.png" />
-                </div>
-
-                <div class="input-group mb-4">
+                <div class="input-group mb-4 pt-5">
                     <span class="input-group-text"><i class="fa fa-user"></i></span>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                 </div>
@@ -43,6 +39,8 @@
                 <div class="d-flex justify-content-center pt-3">
                     <button type="submit" class="btn btn-dark" formaction="/login" formmethod="post">Login</button>
                 </div>
+
+                <a class="pt-2 text-center">Forgot Password?</a>
 
             </form>
         </div>
