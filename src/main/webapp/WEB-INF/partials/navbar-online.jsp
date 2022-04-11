@@ -4,7 +4,7 @@
             <div id="logo-index"></div>
         </a>
         <div class="">
-            <a class="text-decoration-none" href="/login">Sign In
+            <a class="text-decoration-none" href="/logout">Logout
                 <i class="px-1 fa fa-user text-white"></i>
             </a>
         </div>
