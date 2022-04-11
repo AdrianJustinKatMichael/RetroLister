@@ -1,5 +1,9 @@
 package controllers;
 
+import dao.DaoFactory;
+import models.User;
+import util.Password;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,10 +27,29 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordRepeat = request.getParameter("password-repeat");
 
+        // validate input
+        boolean inputHasErrors = username.isEmpty()
+                || email.isEmpty()
+                || password.isEmpty()
+                || (! password.equals(passwordRepeat));
 
-        // Todo: Valid Account does not already exist in the DAO/Model
+        if (inputHasErrors) {
+            response.sendRedirect("/register");
+            return;
+        }
 
-        // Todo: Add User to Model
+        // Valid Account does not already exist in the DAO/Model
+        User user = DaoFactory.getUsersDao().findByUsername(username);
+        if (user != null) {
+            response.sendRedirect("/register");
+            System.out.println("User already exists.");
+            return;
+        }
+
+        // Add User to Model
+        String hashedPassword = Password.hash(password);
+        User userToInsert = new User(username, email, hashedPassword);
+        DaoFactory.getUsersDao().insert(userToInsert);
+        response.sendRedirect("/login");
     }
-
 }
