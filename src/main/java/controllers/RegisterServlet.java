@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String passwordRepeat = request.getParameter("password-repeat");
+        String passwordRepeat = request.getParameter("password-confirm");
 
         // validate input
         boolean inputHasErrors = username.isEmpty()
