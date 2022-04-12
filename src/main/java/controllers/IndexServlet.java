@@ -1,6 +1,12 @@
 package controllers;
 
+import dao.*;
+import models.*;
+
+import com.google.gson.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,7 +18,22 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        if (request.getSession().getAttribute("user") != null) {
+            User user = (User) request.getSession().getAttribute("user");
+            String username = user.getUsername();
+            request.setAttribute("username", username);
+        }
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Ad> ads = DaoFactory.getAdsDao().all();
+        String json = new Gson().toJson(ads);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
 }

@@ -149,6 +149,18 @@ public class AdsDao implements Ads{
         }
     }
 
+    @Override
+    public boolean deleteByUserId(Long userId) {
+        try {
+            String query = "DELETE FROM ads WHERE user_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
+            return stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user's ad(s).", e);
+        }
+    }
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getLong("id"),
