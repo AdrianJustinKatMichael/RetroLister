@@ -38,11 +38,11 @@ public class LoginServlet extends HttpServlet{
         if (validAttempt && isAdmin) {
             session.setAttribute("user", user);
             session.setAttribute("admin", user);
-            response.sendRedirect("/profile");
+            response.sendRedirect("/index");
             System.out.println("Logged in as admin.");
         } else if (validAttempt){
             session.setAttribute("user", user);
-            response.sendRedirect("/profile");
+            response.sendRedirect("/index");
             System.out.println("Logged in as regular user.");
         } else {
             response.sendRedirect("/login");
