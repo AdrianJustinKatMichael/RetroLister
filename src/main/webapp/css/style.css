@@ -84,18 +84,15 @@ footer {
     height: 150px;
 }
 
-#list {
-    height: 700px;
-}
-
 .test {
     width: 700px;
     height: 200px;
 }
 
-#list-2 {
-    height: 700px;
-    width: 717px;
+#list {
+    display: grid;
+    grid-template-columns: repeat(2, 50px 1fr) 100px;
+    grid-gap: 10px;
 }
 
 /*following is for admin jsp*/

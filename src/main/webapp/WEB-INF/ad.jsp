@@ -15,7 +15,7 @@
     </style>
 </head>
 <body>
-<%@ include file="partials/navbar-online.jsp" %>
+<%@ include file="partials/navbar-complex.jsp" %>
 <div class="container d-flex justify-content-center align-items-center">
     <div class="card mb-3">
         <div class="row g-0">
