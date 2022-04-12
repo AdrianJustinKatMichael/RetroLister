@@ -41,18 +41,6 @@
             <img id="splash" src="https://via.placeholder.com/1200x300.png" />
         </div>
 
-        <div class="d-flex flex-row justify-content-center">
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-        </div>
-
         <c:if test="${not empty username}">
             <div class="input-group w-75 mx-auto p-2 border-0 bg-light">
                 <input type="text" class="form-control shadow-none" id="search-bar" placeholder="Title or Console">
@@ -65,7 +53,9 @@
         </c:if>
 
         <div class="d-flex flex-column align-items-center my-4">
-            <div id="list-2" class="overflow-auto"></div>
+            <div id="list">
+
+            </div>
         </div>
 
         <footer></footer>
