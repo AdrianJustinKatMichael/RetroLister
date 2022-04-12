@@ -26,13 +26,24 @@ public class UsersDao implements Users {
     @Override
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
+        User user = null;
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, username);
-            return extractUser(stmt.executeQuery());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                user = new User(
+                        rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getBoolean("isAdmin")
+                );
+            }
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
         }
+        return user;
     }
 
     @Override
@@ -78,9 +89,6 @@ public class UsersDao implements Users {
 
     private User extractUser(ResultSet rs) {
         try {
-            if (! rs.next()) {
-                return null;
-            }
             return new User(
                     rs.getLong("id"),
                     rs.getString("username"),
