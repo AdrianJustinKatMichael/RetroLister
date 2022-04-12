@@ -3,6 +3,7 @@ package controllers;
 import dao.*;
 import models.*;
 
+import com.google.gson.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,16 @@ public class IndexServlet extends HttpServlet {
         }
         request.setAttribute("ads", ads);
         request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Ad> ads = DaoFactory.getAdsDao().all();
+        String json = new Gson().toJson(ads);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
 }

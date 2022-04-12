@@ -44,15 +44,13 @@
             </div>
         </div>
 
-        <div id="search-index" class="input-group w-50 mx-auto p-2 border-0 bg-light">
-            <input type="text" class="form-control shadow-none" placeholder="Search">
-            <div class="input-group-append">
-                <button class="btn btn-secondary dropdown-toggle shadow-none" type="button" data-toggle="dropdown">Filter</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Title</a>
-                    <a class="dropdown-item" href="#">Console</a>
-                </div>
-            </div>
+        <div class="input-group w-75 mx-auto p-2 border-0 bg-light">
+            <input type="text" class="form-control" id="search-bar" placeholder="Title or Console">
+            <select class="custom-select" id="search-filter">
+                <option value="all" selected>All</option>
+                <option value="title">Title</option>
+                <option value="console">Console</option>
+            </select>
         </div>
 
         <div class="d-flex flex-column align-items-center my-4">
@@ -94,6 +92,59 @@
 
         <%@ include file="partials/foot.jsp" %>
         <script>
+            let searchFilter = document.querySelector('#search-filter');
+            let searchField = document.querySelector('#search-bar');
+
+            let renderAds = (list) => {
+
+            }
+            let searchAds = (e) => {
+                e.preventDefault();
+
+                let filter = searchFilter.value;
+
+                $.post('/index').done((data) => {
+                    let filteredAds = [];
+
+                    switch (filter) {
+                        case 'all': filteredAds = data; break;
+                        case 'title':
+                            data.forEach(ad => {
+                                if (ad.title.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                    filteredAds.push(ad);
+                                }
+                            })
+                            break;
+                        case 'console':
+                            data.forEach(ad => {
+                                if (ad.console.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                    filteredAds.push(ad);
+                                }
+                            })
+                            break;
+                    }
+
+                    console.log(filteredAds);
+                    renderAds(filteredAds)
+                });
+
+            }
+
+            searchField.addEventListener('keyup', searchAds);
+
+            // $('.custom-select option').click(function() {
+            //     let filter = $(this).val();
+            //     console.log(`\${filter}`);
+            //
+            //     switch (filter) {
+            //         case 'all':
+            //             break;
+            //         case 'title':
+            //             break;
+            //         case 'console':
+            //             break;
+            //     }
+            // });
 <%--
 
             $('.dropdown-menu a').click(function(){
