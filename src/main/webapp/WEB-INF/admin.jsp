@@ -23,7 +23,7 @@
 
 </head>
 <body>
-<%@ include file="partials/navbar-online.jsp" %>
+<%@ include file="partials/navbar-complex.jsp" %>
 
 <%--<select class="form-select form-select-sm" aria-label=".form-select-sm">--%>
 <%--    <c:forEach var="user" items="${users}">--%>
