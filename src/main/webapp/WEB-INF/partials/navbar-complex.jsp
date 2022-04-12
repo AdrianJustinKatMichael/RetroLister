@@ -19,14 +19,10 @@
             </div>
             <c:choose>
                 <c:when test="${not empty param.username}">
-                     <a class="text-decoration-none" href="/profile">
-                        ${param.username}
-                     </a>
+                     <a class="text-decoration-none" href="/profile">${param.username}</a>
                 </c:when>
                 <c:otherwise>
-                    <a class="text-decoration-none" href="/login">
-                                Sign In
-                    </a>
+                    <a class="text-decoration-none" href="/login">Sign In</a>
                 </c:otherwise>
             </c:choose>
         </div>
