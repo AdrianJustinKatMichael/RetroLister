@@ -61,6 +61,10 @@ body {
     height: 425px;
 }
 
+#create-form {
+    height: 600px;
+}
+
 .ads-form {
     height: 475px;
 }
@@ -80,18 +84,10 @@ footer {
     height: 150px;
 }
 
-#list {
-    height: 700px;
-}
-
-.test {
-    width: 700px;
-    height: 200px;
-}
-
-#list-2 {
-    height: 700px;
-    width: 717px;
+#index-game-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
 }
 
 /*following is for admin jsp*/
@@ -113,7 +109,7 @@ footer {
     background-color: #E1BEE7;
     transform: scaleY(1);
     transition: all 0.5s;
-    transform-origin: bottom
+    transform-origin: top
 }
 
 .card:after {
@@ -126,7 +122,7 @@ footer {
     background-color: #8024aa;
     transform: scaleY(0);
     transition: all 0.5s;
-    transform-origin: bottom
+    transform-origin: top
 }
 
 .card:hover::after {

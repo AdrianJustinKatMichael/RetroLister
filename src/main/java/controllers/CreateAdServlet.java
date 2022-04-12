@@ -2,7 +2,7 @@ package controllers;
 
 import dao.DaoFactory;
 import models.Ad;
-import util.GetPosters;
+import models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +15,12 @@ import java.io.IOException;
 public class CreateAdServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("/login");
-            return;
-        }
+        if (request.getSession().getAttribute("user") == null) { response.sendRedirect("/login"); return; }
+
+        User user = (User) request.getSession().getAttribute("user");
+        String username = user.getUsername();
+        request.setAttribute("username", username);
+
         request.getRequestDispatcher("/WEB-INF/create-ad.jsp").forward(request, response);
     }
 
@@ -28,7 +30,7 @@ public class CreateAdServlet extends HttpServlet {
         String console = request.getParameter("console");
         String postType = request.getParameter("post-type");
         String description = request.getParameter("description");
-        String imageURL = GetPosters.getImagePoster(title);
+        String placeholderImageURL = "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80";
         long userId = Long.parseLong(request.getParameter("userId"));  // getting this from saved user from session
 
         // validate input
@@ -43,7 +45,7 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         // Add Ad Object to database
-        Ad adToInsert = new Ad(userId, title, console, description, imageURL, postType);
+        Ad adToInsert = new Ad(userId, title, console, description, placeholderImageURL, postType);
         DaoFactory.getAdsDao().insert(adToInsert);
         response.sendRedirect("/profile");
     }
