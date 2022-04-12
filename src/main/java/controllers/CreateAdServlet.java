@@ -2,6 +2,8 @@ package controllers;
 
 import dao.DaoFactory;
 import models.Ad;
+import util.GetPosters;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +28,7 @@ public class CreateAdServlet extends HttpServlet {
         String console = request.getParameter("console");
         String postType = request.getParameter("post-type");
         String description = request.getParameter("description");
-        String placeholderImageURL = "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80";
+        String imageURL = GetPosters.getImagePoster(title);
         long userId = Long.parseLong(request.getParameter("userId"));  // getting this from saved user from session
 
         // validate input
@@ -41,7 +43,7 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         // Add Ad Object to database
-        Ad adToInsert = new Ad(userId, title, console, description, placeholderImageURL, postType);
+        Ad adToInsert = new Ad(userId, title, console, description, imageURL, postType);
         DaoFactory.getAdsDao().insert(adToInsert);
         response.sendRedirect("/profile");
     }

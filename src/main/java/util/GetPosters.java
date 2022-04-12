@@ -22,7 +22,7 @@ public class GetPosters {
         TwitchAuthenticator tAuth = TwitchAuthenticator.INSTANCE;
         TwitchToken token = tAuth.requestTwitchToken(CLIENT_ID, CLIENT_SECRET);
         String ACCESS_TOKEN = token.getAccess_token();
-        String imageURL = null;
+        String imageURL = "https://via.placeholder.com/200x200.png";
 
         try {
             // GET GAME ID
@@ -35,7 +35,7 @@ public class GetPosters {
 
             JSONArray arr = jsonResponse.getBody().getArray();
 
-            if(arr.length() == 0){
+            if(arr.length() == 0){   // no poster found don't change placeholder
                 System.out.println("No game found.");
             } else {
                 String gameId = arr.getJSONObject(0).get("id").toString();
