@@ -37,12 +37,12 @@
             </c:otherwise>
         </c:choose>
 
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid mb-4">
             <img id="splash" src="https://via.placeholder.com/1200x300.png" />
         </div>
 
         <c:if test="${not empty username}">
-            <div class="input-group w-75 mx-auto p-2 border-0 bg-light">
+            <div class="input-group w-75  mb-4 mx-auto p-2 border-0 bg-light">
                 <input type="text" class="form-control shadow-none" id="search-bar" placeholder="Title or Console">
                 <select class="custom-select" id="search-filter">
                     <option value="description" selected>Description</option>
@@ -52,9 +52,11 @@
             </div>
         </c:if>
 
-        <div class="d-flex flex-column align-items-center my-4">
-            <div id="list">
-
+        <div class="container-fluid mb-4">
+            <div class="row">
+                <div class="col">
+                    <div id="index-game-list"></div>
+                </div>
             </div>
         </div>
 
@@ -64,7 +66,7 @@
         <script>
             let searchFilter = document.querySelector('#search-filter');
             let searchField = document.querySelector('#search-bar');
-            let listSpace = document.querySelector('#list-2');
+            let listSpace = document.querySelector('#index-game-list');
 
             $.post('/index').done((data) => {
                 listSpace.innerHTML = buildAdsList(data);
@@ -72,7 +74,7 @@
 
             let buildAd = (ad) => {
                 let html = `
-                    <div class="test card flex-row border-0">
+                    <div class="card game-card flex-row border-0">
                         <img class="" src="https://via.placeholder.com/200x200.png"/>
                         <div class="card-body">
                             <h3 class="card-title">\${ad.title}</h3>
