@@ -21,7 +21,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="/WEB-INF/partials/navbar-login.jsp" %>
+        <%@ include file="/WEB-INF/partials/navbar-simple.jsp" %>
 
         <div class="container d-flex justify-content-center align-items-center">
             <div class="col">

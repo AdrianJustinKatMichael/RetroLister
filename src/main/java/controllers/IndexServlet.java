@@ -18,19 +18,12 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Ads adsDao = DaoFactory.getAdsDao();
-        List<Ad> ads = new ArrayList<>();
-
         if (request.getSession().getAttribute("user") != null) {
             User user = (User) request.getSession().getAttribute("user");
             String username = user.getUsername();
             request.setAttribute("username", username);
-            ads = adsDao.all();
-        } else {
-            ads = adsDao.lastFiveAds();
         }
-        request.setAttribute("ads", ads);
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override

@@ -23,7 +23,10 @@
 
     </head>
     <body>
-    <%@ include file="partials/navbar-online.jsp" %>
+
+    <jsp:include page="/WEB-INF/partials/navbar-complex.jsp">
+        <jsp:param name="username" value="${username}" />
+    </jsp:include>
 
     <div class="container">
 
