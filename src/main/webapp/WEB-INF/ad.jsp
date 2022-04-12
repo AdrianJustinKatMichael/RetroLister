@@ -17,14 +17,24 @@
 <body>
 <%@ include file="partials/navbar-online.jsp" %>
 <div class="container d-flex justify-content-center align-items-center">
-    <div class="col">
-        <div class="row d-flex justify-content-center align-items-center">
-            <h2>${ad.getTitle()}</h2>
-            <h4>${ad.getConsole()}</h4>
-            <p>${ad.getDescription()}</p>
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="${ad.getImageUrl()}" class="img-fluid rounded-start" alt="ad img">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title">${ad.getTitle()}</h1>
+                    <h4 class="card-subtitle mb-2 text-muted">${ad.getConsole()}</h4>
+                    <p class="card-text">${ad.getDescription()}</p>
+                    <p class="card-text"><small class="text-muted">Listing created by <a href="/profile?id=${creator.getId()}">${creator.getUsername()}</a></small></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<a href=""></a>
 <%@ include file="/WEB-INF/partials/foot.jsp" %>
 </body>
 </html>

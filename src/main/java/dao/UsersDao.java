@@ -34,6 +34,29 @@ public class UsersDao implements Users {
     }
 
     @Override
+    public User findUserById(Long userId) {
+        String query = "SELECT * FROM users WHERE id = ?";
+        User user = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                user = new User(
+                        rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getBoolean("isAdmin")
+                );
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by that id.", e);
+        }
+        return user;
+    }
+
+    @Override
     public Long insert(User user) {
         String query = "INSERT INTO users(username, email, password, isAdmin) VALUES (?, ?, ?, ?)";
         try {
