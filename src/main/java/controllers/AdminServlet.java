@@ -18,7 +18,32 @@ public class AdminServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("users", DaoFactory.getUsersDao().all());
-//        System.out.println(DaoFactory.getUsersDao().all().size()); // <--- for checking in services terminal
+        request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("button pressed");
+        String userId = request.getParameter("value");
+        String username = request.getParameter("usernames");
+        String buttonDel = request.getParameter("delete");
+        String buttonPro = request.getParameter("promote");
+
+        try {
+            if ("delete".equals(buttonDel)) {
+                DaoFactory.getAdsDao().deleteByUserId(Long.valueOf(userId));
+                DaoFactory.getUsersDao().deleteUserById(Long.valueOf(userId));
+            }
+            if ("promote".equals(buttonPro)) {
+                User user = DaoFactory.getUsersDao().findUserById(Long.valueOf(userId));
+                DaoFactory.getUsersDao().update(user);
+                System.out.println("follow through");
+                DaoFactory.getUsersDao().all();
+            }
+            request.setAttribute("users", DaoFactory.getUsersDao().all());
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
         request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 }
