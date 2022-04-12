@@ -61,6 +61,10 @@ body {
     height: 425px;
 }
 
+#create-form {
+    height: 600px;
+}
+
 .ads-form {
     height: 475px;
 }
