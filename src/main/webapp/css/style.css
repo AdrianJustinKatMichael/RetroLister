@@ -79,7 +79,12 @@ footer {
     height: 700px;
 }
 
-#frame {
-    width: 380px;
+.test {
+    width: 700px;
+    height: 200px;
+}
+
+#list-2 {
     height: 700px;
+    width: 717px;
 }

@@ -45,48 +45,17 @@
         </div>
 
         <div class="input-group w-75 mx-auto p-2 border-0 bg-light">
-            <input type="text" class="form-control" id="search-bar" placeholder="Title or Console">
+            <input type="text" class="form-control shadow-none" id="search-bar" placeholder="Title or Console">
             <select class="custom-select" id="search-filter">
-                <option value="all" selected>All</option>
+                <option value="description" selected>Description</option>
                 <option value="title">Title</option>
                 <option value="console">Console</option>
             </select>
         </div>
 
         <div class="d-flex flex-column align-items-center my-4">
-            <div id="list" class="overflow-auto">
-                <c:forEach var="ad" items="${ads}">
-                        <div class="card border-0" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img class="card-img" src="https://via.placeholder.com/200x200.png" />
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body bg-secondary text-light">
-                                        <div class="row">
-                                            <h3 class="col">${ad.getTitle()}</h3>
-                                            <c:choose>
-                                                <c:when test="${ad.getPostType() == 'reqeust'}">
-                                                    <span class="col-5 text-success">${ad.getPostType()}</span>
-                                                </c:when>
-                                                <c:when test="${ad.getPostType() == 'post'}">
-                                                    <span class="col-4 text-danger">${ad.getPostType()}</span>
-                                                </c:when>
-                                            </c:choose>
-                                        </div>
-                                        <div class="row pt-2">
-                                            <h6 class="col">${ad.getConsole()}</h6>
-                                        </div>
-                                        <p class="card-text">${ad.getDescription()}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </c:forEach>
-            </div>
+            <div id="list-2" class="overflow-auto"></div>
         </div>
-
-        <iframe id="frame" src="/list" title="List"></iframe>
 
         <footer></footer>
 
@@ -94,9 +63,32 @@
         <script>
             let searchFilter = document.querySelector('#search-filter');
             let searchField = document.querySelector('#search-bar');
+            let listSpace = document.querySelector('#list-2');
 
-            let renderAds = (list) => {
+            $.post('/index').done((data) => {
+                listSpace.innerHTML = buildAdsList(data);
+            });
 
+            let buildAd = (ad) => {
+                let html = `
+                    <div class="test card flex-row border-0">
+                        <img class="" src="https://via.placeholder.com/200x200.png"/>
+                        <div class="card-body">
+                            <h3 class="card-title">\${ad.title}</h3>
+                            <h6 class="card-text">\${ad.console}</h6>
+                            <p class="card-text">\${ad.description}</p>
+                            <span class="text-muted text-right">Post: \${ad.postType}</span>
+                        </div>
+                    </div>
+                `;
+                return html;
+            }
+            let buildAdsList = (list) => {
+                let html = '';
+                for (let i = 0; i < list.length; i++) {
+                    html += buildAd(list[i]);
+                }
+                return html;
             }
             let searchAds = (e) => {
                 e.preventDefault();
@@ -107,7 +99,13 @@
                     let filteredAds = [];
 
                     switch (filter) {
-                        case 'all': filteredAds = data; break;
+                        case 'description':
+                            data.forEach(ad => {
+                                if (ad.description.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                    filteredAds.push(ad);
+                                }
+                            })
+                            break;
                         case 'title':
                             data.forEach(ad => {
                                 if (ad.title.toLowerCase().includes(searchField.value.toLowerCase())) {
@@ -125,80 +123,11 @@
                     }
 
                     console.log(filteredAds);
-                    renderAds(filteredAds)
+                    listSpace.innerHTML = buildAdsList(filteredAds);
                 });
-
             }
 
             searchField.addEventListener('keyup', searchAds);
-
-            // $('.custom-select option').click(function() {
-            //     let filter = $(this).val();
-            //     console.log(`\${filter}`);
-            //
-            //     switch (filter) {
-            //         case 'all':
-            //             break;
-            //         case 'title':
-            //             break;
-            //         case 'console':
-            //             break;
-            //     }
-            // });
-<%--
-
-            $('.dropdown-menu a').click(function(){
-
-                let filter = $(this)[0].innerHTML;
-                let query = $(this)[0].parentElement.parentElement.parentElement.firstElementChild.value;
-
-                console.log(filter);
-                console.log(query);
-
-                <%! String filter; %>
-                <% filter = request.getParameter("filter"); %>
-                <%! String query; %>
-                <% query = request.getParameter("query"); %>
-                <% request.setAttribute("filter", filter); %>
-                <% request.setAttribute("query", query); %>
-
-                let element = document.querySelector('#list');
-                element.innerHTML = `
-                <h1><%= filter %></h1>
-                    <c:forEach var="ad" items="${ads}">
-                        <c:if test="${filter.equals(query)}">
-                            <div class="card border-0" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img class="card-img" src="https://via.placeholder.com/200x200.png" />
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body bg-secondary text-light">
-                                            <div class="row">
-                                                <h3 class="col">${ad.getTitle()}</h3>
-                                                <c:choose>
-                                                    <c:when test="${ad.getPostType() == 'reqeust'}">
-                                                        <span class="col-5 text-success">${ad.getPostType()}</span>
-                                                    </c:when>
-                                                    <c:when test="${ad.getPostType() == 'post'}">
-                                                        <span class="col-4 text-danger">${ad.getPostType()}</span>
-                                                    </c:when>
-                                                </c:choose>
-                                            </div>
-                                            <div class="row pt-2">
-                                                <h6 class="col">${ad.getConsole()}</h6>
-                                            </div>
-                                            <p class="card-text">${ad.getDescription()}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:if>
-                    </c:forEach>
-                `;
-                console.log(element);
-            });
---%>
         </script>
     </body>
 </html>
