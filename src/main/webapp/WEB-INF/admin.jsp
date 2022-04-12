@@ -25,24 +25,34 @@
 <body>
 <%@ include file="partials/navbar-complex.jsp" %>
 
-<%--<select class="form-select form-select-sm" aria-label=".form-select-sm">--%>
-<%--    <c:forEach var="user" items="${users}">--%>
-<%--        <option>${user.username}</option>--%>
-<%--    </c:forEach>--%>
-<%--</select>--%>
-
-<div>
-    <label class="title">Select a username: <br></label>
-    <label>
-        <select name="usernames">
-            <c:forEach var="user" items="${users}">
-                <option value="${user.id}">${user.username}</option>
-            </c:forEach>
-
-            <optgroup label=""></optgroup>
-        </select>
-    </label>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-7">
+            <div class="card p-3 py-4">
+                <div class="text-center mt-3"> <h1 class="header">Admin Panel</h1>
+                    <div class="px-4 mt-1">
+                        <p class="fonts">Delete User or Make User an Admin. <br>Caution: Deleting a User will remove all Ad Listings associated with that User. </p>
+                    </div>
+                    <p class="fonts">Select a username: </p>
+                    <ul class="actions-list p-0">
+                        <li style="list-style: none;">
+                            <label>
+                                <select name="usernames">
+                                    <c:forEach var="user" items="${users}">
+                                        <option value="${user.id}">${user.username}</option>
+                                    </c:forEach>
+                                    <optgroup label=""></optgroup>
+                                </select>
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="buttons"> <button class="btn btn-outline-primary px-4" onclick="">Delete User</button> <button class="btn btn-primary px-4 ms-3" onclick="">Make Admin</button> </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <%@ include file="partials/foot.jsp" %>
 </body>
 </html>
