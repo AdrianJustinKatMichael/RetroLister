@@ -76,14 +76,21 @@ public class UsersDao implements Users {
         }
     }
 
-    private User extractUser(ResultSet rs) throws SQLException {
-        return new User(
-                rs.getLong("id"),
-                rs.getString("username"),
-                rs.getString("email"),
-                rs.getString("password"),
-                rs.getBoolean("isAdmin")
-        );
+    private User extractUser(ResultSet rs) {
+        try {
+            if (! rs.next()) {
+                return null;
+            }
+            return new User(
+                    rs.getLong("id"),
+                    rs.getString("username"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getBoolean("isAdmin")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException("Error extracting user", e);
+        }
     }
 
     @Override

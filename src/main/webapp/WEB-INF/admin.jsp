@@ -23,7 +23,7 @@
 
 </head>
 <body>
-<%@ include file="partials/navbar-online.jsp" %>
+<%@ include file="partials/navbar-complex.jsp" %>
 
 <div class="container mt-5">
     <div class="row d-flex justify-content-center">
