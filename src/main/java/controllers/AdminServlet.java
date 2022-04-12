@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.DaoFactory;
+import dao.UsersDao;
 import models.User;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ public class AdminServlet extends HttpServlet {
     private HttpSession session;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("users", DaoFactory.getUsersDao().all());
+//        System.out.println(DaoFactory.getUsersDao().all().size()); // <--- for checking in services terminal
         request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 }
