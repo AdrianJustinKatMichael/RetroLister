@@ -15,7 +15,9 @@
     </style>
 </head>
 <body>
-<%@ include file="partials/navbar-complex.jsp" %>
+<jsp:include page="/WEB-INF/partials/navbar-complex.jsp">
+    <jsp:param name="username" value="${username}" />
+</jsp:include>
 <div class="container d-flex justify-content-center align-items-center">
     <div class="card mb-3">
         <div class="row g-0">
