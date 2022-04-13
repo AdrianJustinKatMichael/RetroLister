@@ -49,10 +49,10 @@
                             </label>
                         </li>
                     </ul>
-                        <label for="delete">Type yes if you want to delete: </label>
-                        <input id="delete" name="delete" type="text">
+                        <label for="delete">Confirm action by typing "yes": </label><br>
+                        <input class="border border-primary m-1 mb-2 shadow-sm" id="delete" name="delete" type="text"><br>
 
-                        <button formmethod="post" formaction="/admin" class="btn btn-outline-primary px-4" type="submit" name="delete">Delete User</button>
+                        <button formmethod="post" formaction="/admin" class="btn btn-outline-primary px-4" type="submit" name="deletion">Delete User</button>
 
                         <button formmethod="post" formaction="/admin" class="btn btn-primary px-4 ms-3" type="submit" name="promote">Make Admin</button>
                     </form>

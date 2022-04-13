@@ -102,11 +102,11 @@ public class UsersDao implements Users {
     }
 
     @Override
-    public void update(User user) {
+    public void update(Long id) {
         String query = "UPDATE users SET isAdmin = 1 WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setLong(1, user.getId());
+            stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error updating user.", e);
