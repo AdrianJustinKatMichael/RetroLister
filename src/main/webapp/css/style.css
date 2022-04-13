@@ -14,6 +14,14 @@ h6 { font-size: clamp(16px, 1.5vw, 20px); }
 
 p { font-size: clamp(12px, 1.25vw, 16px); }
 
+.text-shadow {
+    text-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075),
+    0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075),
+    0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
 .tag { color: black; }
 
 body {
@@ -34,6 +42,8 @@ body {
     width: auto;
     height: 75px;
 }
+
+
 
 #logo-login {
     background-image: url('/img/logo-login.png');

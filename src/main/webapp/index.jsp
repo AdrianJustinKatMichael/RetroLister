@@ -71,9 +71,15 @@
                     <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-github"></i></a>
                 </section>
             </div>
-            <div class="text-center text-light p-3">
-                © 2022 Copyright:
-                <a class="text-dark text-decoration-none" href="/index">RetroLister.com</a>
+            <div class="text-center p-3">
+                <span class="text-light">
+                    © 2022
+                    <a class="text-dark text-decoration-none" href="/index">Privacy Policy</a>
+                </span>
+                <span class="q-px-xs">•</span>
+                <span><a class="text-dark text-decoration-none" href="/index">Terms of Service</a></span>
+                <span class="q-px-xs">•</span>
+                <span><a class="text-dark text-decoration-none" href="/index">Affiliate Agreement </a></span>
             </div>
         </footer>
 
@@ -91,9 +97,9 @@
                         <a class="card flex-row border-0 text-decoration-none shadow" href="/ad?id=\${ad.id}">
                             <img class="" src="\${ad.imageUrl}"/>
                             <div class="card-body">
-                                <h3 class="card-title">\${ad.title}</h3>
-                                <h6 class="card-text"><span class="tag">Console: </span>\${ad.console}</h6>
-                                <p class="card-text">\${ad.description}</p>
+                                <h3 class="card-title text-shadow">\${ad.title}</h3>
+                                <h6 class="card-text text-shadow"><span class="tag">Console: </span>\${ad.console}</h6>
+                                <p class="card-text text-shadow">\${ad.description}</p>
                                 <span class="text-muted text-right">Post: \${ad.postType}</span>
                             </div>
                         </a>
