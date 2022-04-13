@@ -102,24 +102,24 @@ public class UsersDao implements Users {
     }
 
     @Override
-    public int update(User user) {
+    public void update(User user) {
         String query = "UPDATE users SET isAdmin = 1 WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, user.getId());
-            return stmt.executeUpdate();
+            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Error updating user.", e);
         }
     }
 
     @Override
-    public boolean deleteUserById(Long id) {
+    public void deleteUser(Long id) {
         try {
             String query = "DELETE FROM users WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, id);
-            return stmt.execute();
+            stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException("Error deleting user.", e);
         }

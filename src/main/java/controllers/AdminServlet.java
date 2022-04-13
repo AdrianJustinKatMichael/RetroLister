@@ -22,28 +22,25 @@ public class AdminServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("button pressed");
-        String userId = request.getParameter("value");
-        String username = request.getParameter("usernames");
-        String buttonDel = request.getParameter("delete");
-        String buttonPro = request.getParameter("promote");
-
-        try {
-            if ("delete".equals(buttonDel)) {
-                DaoFactory.getAdsDao().deleteByUserId(Long.valueOf(userId));
-                DaoFactory.getUsersDao().deleteUserById(Long.valueOf(userId));
-            }
-            if ("promote".equals(buttonPro)) {
-                User user = DaoFactory.getUsersDao().findUserById(Long.valueOf(userId));
-                DaoFactory.getUsersDao().update(user);
-                System.out.println("follow through");
-                DaoFactory.getUsersDao().all();
-            }
-            request.setAttribute("users", DaoFactory.getUsersDao().all());
-        } catch (Exception e) {
-            System.out.println("error");
+        String userId = request.getParameter("usernames");
+//        String buttonDel = request.getParameter("delete");
+//        String buttonPro = request.getParameter("promote");
+//
+//        if (buttonDel != null) {
+//            User user = DaoFactory.getUsersDao().findUserById(Long.valueOf(userId));
+//            DaoFactory.getAdsDao().deleteByUserId(user.getId());
+//            DaoFactory.getUsersDao().deleteUser(user.getId());
+//        } else if (buttonPro != null) {
+//            User user = DaoFactory.getUsersDao().findUserById(Long.valueOf(userId));
+//            DaoFactory.getUsersDao().update(user);
+//        }
+//        Long userId = Long.valueOf(request.getParameter("userList"));
+        System.out.println(userId);
+        String test = request.getParameter("delete");
+        if (test.equals("yes")) {
+             DaoFactory.getUsersDao().deleteUser(Long.valueOf(userId));
         }
-
+        DaoFactory.getUsersDao().all();
         request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 }
