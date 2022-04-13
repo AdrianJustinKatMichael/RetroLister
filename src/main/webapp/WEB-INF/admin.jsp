@@ -23,7 +23,9 @@
 
 </head>
 <body>
-<%@ include file="partials/navbar-complex.jsp" %>
+<jsp:include page="/WEB-INF/partials/navbar-complex.jsp">
+    <jsp:param name="username" value="${username}" />
+</jsp:include>
 
 <div class="container mt-5">
     <div class="row d-flex justify-content-center">
