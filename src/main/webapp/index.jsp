@@ -63,22 +63,22 @@
         <footer class="text-center text-white">
             <div class="container pt-4">
                 <section class="mb-4">
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-facebook-f"></i></a>
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-twitter"></i></a>
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-google"></i></a>
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-instagram"></i></a>
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-linkedin"></i></a>
-                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-github"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-facebook-f"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-twitter"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-google"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-instagram"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-linkedin"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg m-1" href="#!" style="color: #526dff"><i class="fa fa-github"></i></a>
                 </section>
             </div>
             <div class="text-center p-3">
                 <span class="text-light">
-                    © 2022
+                    <span style="color: #ffcf28">©</span> 2022
                     <a class="text-dark text-decoration-none" href="/index">Privacy Policy</a>
                 </span>
-                <span class="q-px-xs">•</span>
+                <span class="q-px-xs" style="color: #ffcf28">•</span>
                 <span><a class="text-dark text-decoration-none" href="/index">Terms of Service</a></span>
-                <span class="q-px-xs">•</span>
+                <span class="q-px-xs" style="color: #ffcf28">•</span>
                 <span><a class="text-dark text-decoration-none" href="/index">Affiliate Agreement </a></span>
             </div>
         </footer>
@@ -96,11 +96,11 @@
                     let html = `
                         <a class="card flex-row border-0 text-decoration-none shadow" href="/ad?id=\${ad.id}">
                             <img class="" src="\${ad.imageUrl}"/>
-                            <div class="card-body">
-                                <h3 class="card-title text-shadow">\${ad.title}</h3>
-                                <h6 class="card-text text-shadow"><span class="tag">Console: </span>\${ad.console}</h6>
-                                <p class="card-text text-shadow">\${ad.description}</p>
-                                <span class="text-muted text-right">Post: \${ad.postType}</span>
+                            <div class="card-body overflow-auto">
+                                <h3 class="card-title text-black text-shadow">\${ad.title}</h3>
+                                <h6 class="card-text text-muted text-shadow">\${ad.console}</h6>
+                                <p class="card-text text-black text-shadow">\${ad.description}</p>
+                                <div class="text-muted text-right subscript">Post: \${ad.postType}</div>
                             </div>
                         </a>
                     `;
