@@ -8,8 +8,7 @@ public interface Users {
     User findByUsername(String username);
     User findUserById(Long userId);
     Long insert(User user);
-    void update(User user);
+    void update(Long id);
     void deleteUser(Long id);
-
     List<User> all();
 }
