@@ -33,20 +33,29 @@
                     <div class="px-4 mt-1">
                         <p class="fonts">Delete User or Make User an Admin. <br>Caution: Deleting a User will remove all Ad Listings associated with that User. </p>
                     </div>
+                    <form class="buttons" method="post" action="${pageContext.request.contextPath}/admin">
                     <p class="fonts">Select a username: </p>
                     <ul class="actions-list p-0">
                         <li style="list-style: none;">
                             <label>
                                 <select name="usernames">
                                     <c:forEach var="user" items="${users}">
-                                        <option value="${user.id}">${user.username}</option>
+                                        <option name="userList" value=${user.id}>
+                                                ${user.username}
+                                        </option>
                                     </c:forEach>
                                     <optgroup label=""></optgroup>
                                 </select>
                             </label>
                         </li>
                     </ul>
-                    <div class="buttons"> <button class="btn btn-outline-primary px-4" onclick="">Delete User</button> <button class="btn btn-primary px-4 ms-3" onclick="">Make Admin</button> </div>
+                        <label for="delete">Type yes if you want to delete: </label>
+                        <input id="delete" name="delete" type="text">
+
+                        <button formmethod="post" formaction="/admin" class="btn btn-outline-primary px-4" type="submit" name="delete">Delete User</button>
+
+                        <button formmethod="post" formaction="/admin" class="btn btn-primary px-4 ms-3" type="submit" name="promote">Make Admin</button>
+                    </form>
                 </div>
             </div>
         </div>
