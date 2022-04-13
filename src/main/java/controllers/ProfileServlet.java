@@ -17,7 +17,7 @@ public class ProfileServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getUsername();
         String email = user.getEmail();
-//        if (user.isAdmin()) request.setAttribute("admin", "true");
+        if (user.isAdmin()) request.setAttribute("admin", "true");
         request.setAttribute("username", username);
         request.setAttribute("email", email);
         
