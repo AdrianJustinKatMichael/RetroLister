@@ -20,11 +20,13 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getUsername();
         request.setAttribute("username", username);
         List<Ad> profileAds;
         boolean canEdit = true;
+
         if (request.getParameter("id") != null) {
             Long profileId = Long.valueOf(request.getParameter("id"));
             if (profileId == user.getId()) {
@@ -41,6 +43,7 @@ public class ProfileServlet extends HttpServlet {
             if (user.isAdmin()) request.setAttribute("admin", "true");
             profileAds = DaoFactory.getAdsDao().usersAds(user.getId());
         }
+
         request.setAttribute("profileAds", profileAds);
         request.setAttribute("canEdit", canEdit);
 

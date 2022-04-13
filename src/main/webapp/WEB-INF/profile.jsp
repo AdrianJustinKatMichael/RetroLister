@@ -36,7 +36,7 @@
                 <ul class="list-group border-0 bg-transparent mt-4" style="width: 200px;">
                     <li class="list-group-item border-0 bg-light"><a
                             class="text-decoration-none text-dark">${profileUser.getUsername()}</a></li>
-                    <c:if test='${canEdit.equals("true")}'>
+                    <c:if test='${canEdit.equals(true)}'>
                         <li class="list-group-item border-0 bg-light">Edit information
                         </li> <%-- open edit account modal --%>
                     </c:if>
@@ -66,13 +66,13 @@
                                     <p class="card-text">${ad.getDescription()}</p>
                                     <span class="text-muted text-right">Post: ${ad.getPostType()}</span>
                                 </div>
-                                <c:if test='${canEdit.equals("true")}'>
-                                    <div class="card-footer text-end">
-                                        <button type="button" data-id="${ad.getId()}" class="editAdButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editAdModal">Edit</button>
-                                        <button type="button" data-id="${ad.getId()}" class="deleteAdButton btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAdModal">Delete</button>
-                                    </div>
-                                </c:if>
                             </div>
+                            <c:if test='${canEdit.equals(true)}'>
+                                <div class="card-footer text-end">
+                                    <button type="button" data-id="${ad.getId()}" class="editAdButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editAdModal">Edit</button>
+                                    <button type="button" data-id="${ad.getId()}" class="deleteAdButton btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAdModal">Delete</button>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </a>
