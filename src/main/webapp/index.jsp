@@ -110,7 +110,7 @@
                 let buildAdsList = (list) => {
                     let limit = 0;
                     if ('${status}' === 'online') limit = list.length;
-                    else limit = 5;
+                    else limit = 4;
 
                     let html = '';
                     for (let i = 0; i < limit; i++) {
