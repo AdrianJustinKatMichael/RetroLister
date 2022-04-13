@@ -8,6 +8,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
+h3 { font-size: clamp(22px, 2.20vw, 32px); }
+
+h6 { font-size: clamp(16px, 1.5vw, 20px); }
+
+p { font-size: clamp(12px, 1.25vw, 16px); }
+
+.tag { color: black; }
+
 body {
     background: #906a9a;
     width: 100%;
@@ -61,6 +69,10 @@ body {
     height: 425px;
 }
 
+#create-form {
+    height: 600px;
+}
+
 .ads-form {
     height: 475px;
 }
@@ -80,18 +92,16 @@ footer {
     height: 150px;
 }
 
-#list {
-    height: 700px;
+#index-game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40vw, 1fr)) ;
+    grid-auto-rows: minmax(10vh, 30vh);
+    grid-gap: 30px;
 }
-
-.test {
-    width: 700px;
-    height: 200px;
-}
-
-#list-2 {
-    height: 700px;
-    width: 717px;
+#index-game-list img {
+    width: 10vw;
+    height: auto;
+    object-fit: cover;
 }
 
 /*following is for admin jsp*/
@@ -113,7 +123,7 @@ footer {
     background-color: #E1BEE7;
     transform: scaleY(1);
     transition: all 0.5s;
-    transform-origin: bottom
+    transform-origin: top
 }
 
 .card:after {
@@ -126,7 +136,7 @@ footer {
     background-color: #8024aa;
     transform: scaleY(0);
     transition: all 0.5s;
-    transform-origin: bottom
+    transform-origin: top
 }
 
 .card:hover::after {

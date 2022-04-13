@@ -37,7 +37,7 @@
                     <img class="profile-img border-dark bg-light p-3 rounded-circle mt-4" src="https://i.pravatar.cc/300" />
                     <ul class="list-group border-0 bg-transparent mt-4" style="width: 200px;">
                         <li class="list-group-item border-0 bg-light"><a class="text-decoration-none text-dark" href="/profile">Personal Information</a></li>
-                        <c:if test="${not empty admin}">
+                        <c:if test='${admin.equals("true")}'>
                             <li class="list-group-item border-0 bg-light"><a class="text-decoration-none text-dark" href="/admin">Admin</a></li>
                         </c:if>
                     </ul>

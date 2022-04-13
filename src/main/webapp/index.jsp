@@ -37,24 +37,12 @@
             </c:otherwise>
         </c:choose>
 
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron jumbotron-fluid mb-4">
             <img id="splash" src="https://via.placeholder.com/1200x300.png" />
         </div>
 
-        <div class="d-flex flex-row justify-content-center">
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-            <div class="m-5">
-                <img class="feature" src="https://via.placeholder.com/250x200.png" />
-            </div>
-        </div>
-
         <c:if test="${not empty username}">
-            <div class="input-group w-75 mx-auto p-2 border-0 bg-light">
+            <div class="input-group w-75  mb-4 mx-auto p-2 border-0 bg-light">
                 <input type="text" class="form-control shadow-none" id="search-bar" placeholder="Title or Console">
                 <select class="custom-select" id="search-filter">
                     <option value="description" selected>Description</option>
@@ -64,86 +52,96 @@
             </div>
         </c:if>
 
-        <div class="d-flex flex-column align-items-center my-4">
-            <div id="list-2" class="overflow-auto"></div>
+        <div class="container-fluid mb-4">
+            <div class="row">
+                <div class="col mx-5">
+                    <div id="index-game-list"></div>
+                </div>
+            </div>
         </div>
 
         <footer></footer>
 
         <%@ include file="WEB-INF/partials/foot.jsp" %>
         <script>
-            let searchFilter = document.querySelector('#search-filter');
-            let searchField = document.querySelector('#search-bar');
-            let listSpace = document.querySelector('#list-2');
+            (() => {
+                //--| Search-Bar: Instance Variables
+                let searchFilter = document.querySelector('#search-filter');
+                let searchField = document.querySelector('#search-bar');
+                let listSpace = document.querySelector('#index-game-list');
 
-            $.post('/index').done((data) => {
-                listSpace.innerHTML = buildAdsList(data);
-            });
-
-            let buildAd = (ad) => {
-                let html = `
-                    <div class="test card flex-row border-0">
-                        <img class="" src="https://via.placeholder.com/200x200.png"/>
-                        <div class="card-body">
-                            <h3 class="card-title">\${ad.title}</h3>
-                            <h6 class="card-text">\${ad.console}</h6>
-                            <p class="card-text">\${ad.description}</p>
-                            <span class="text-muted text-right">Post: \${ad.postType}</span>
-                        </div>
-                    </div>
-                `;
-                return html;
-            }
-            let buildAdsList = (list) => {
-                let limit = 0;
-                if ('${status}' === 'online') limit = list.length;
-                else limit = 5;
-
-                let html = '';
-                for (let i = 0; i < limit; i++) {
-                    html += buildAd(list[i]);
+                //--| Search-Bar: Functions
+                let buildAd = (ad) => {
+                    let html = `
+                        <a class="card flex-row border-0 text-decoration-none" href="/ad?id=\${ad.id}">
+                            <img class="" src="\${ad.imageUrl}"/>
+                            <div class="card-body">
+                                <h3 class="card-title">\${ad.title}</h3>
+                                <h6 class="card-text"><span class="tag">Console: </span>\${ad.console}</h6>
+                                <p class="card-text">\${ad.description}</p>
+                                <span class="text-muted text-right">Post: \${ad.postType}</span>
+                            </div>
+                        </a>
+                    `;
+                    console.log(ad.imageUrl);
+                    return html;
                 }
-                return html;
-            }
-            let searchAds = (e) => {
-                e.preventDefault();
+                let buildAdsList = (list) => {
+                    let limit = 0;
+                    if ('${status}' === 'online') limit = list.length;
+                    else limit = 5;
 
-                let filter = searchFilter.value;
-
-                $.post('/index').done((data) => {
-                    let filteredAds = [];
-
-                    switch (filter) {
-                        case 'description':
-                            data.forEach(ad => {
-                                if (ad.description.toLowerCase().includes(searchField.value.toLowerCase())) {
-                                    filteredAds.push(ad);
-                                }
-                            })
-                            break;
-                        case 'title':
-                            data.forEach(ad => {
-                                if (ad.title.toLowerCase().includes(searchField.value.toLowerCase())) {
-                                    filteredAds.push(ad);
-                                }
-                            })
-                            break;
-                        case 'console':
-                            data.forEach(ad => {
-                                if (ad.console.toLowerCase().includes(searchField.value.toLowerCase())) {
-                                    filteredAds.push(ad);
-                                }
-                            })
-                            break;
+                    let html = '';
+                    for (let i = 0; i < limit; i++) {
+                        html += buildAd(list[i]);
                     }
+                    return html;
+                }
+                let searchAds = (e) => {
+                    e.preventDefault();
 
-                    console.log(filteredAds);
-                    listSpace.innerHTML = buildAdsList(filteredAds);
+                    let filter = searchFilter.value;
+
+                    $.post('/index').done((data) => {
+                        let filteredAds = [];
+
+                        switch (filter) {
+                            case 'description':
+                                data.forEach(ad => {
+                                    if (ad.description.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                        filteredAds.push(ad);
+                                    }
+                                })
+                                break;
+                            case 'title':
+                                data.forEach(ad => {
+                                    if (ad.title.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                        filteredAds.push(ad);
+                                    }
+                                })
+                                break;
+                            case 'console':
+                                data.forEach(ad => {
+                                    if (ad.console.toLowerCase().includes(searchField.value.toLowerCase())) {
+                                        filteredAds.push(ad);
+                                    }
+                                })
+                                break;
+                        }
+
+                        console.log(filteredAds);
+                        listSpace.innerHTML = buildAdsList(filteredAds);
+                    });
+                }
+
+                //--| Search-Bar: Event-listener
+                if (searchField) searchField.addEventListener('keyup', searchAds);
+
+                //--| Search-Bar: Initial Call
+                $.post('/index').done((data) => {
+                    listSpace.innerHTML = buildAdsList(data);
                 });
-            }
-
-            if (searchField) searchField.addEventListener('keyup', searchAds);
-
+            })();
         </script>
     </body>
 </html>
