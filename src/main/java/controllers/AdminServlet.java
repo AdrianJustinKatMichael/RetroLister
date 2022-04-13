@@ -18,7 +18,30 @@ public class AdminServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("users", DaoFactory.getUsersDao().all());
-//        System.out.println(DaoFactory.getUsersDao().all().size()); // <--- for checking in services terminal
+        request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String userId = request.getParameter("usernames");
+        String buttonDel = request.getParameter("deletion");
+        String buttonPro = request.getParameter("promote");
+        String confirm = request.getParameter("delete");
+
+        if (buttonDel != null) {
+            if (confirm.equals("yes")) {
+                DaoFactory.getUsersDao().deleteUser(Long.valueOf(userId));
+                DaoFactory.getUsersDao().all();
+            }
+        } else if (buttonPro != null) {
+            if (confirm.equals("yes")) {
+                DaoFactory.getUsersDao().update(Long.valueOf(userId));
+                DaoFactory.getUsersDao().all();
+            }
+        }
+        else {
+            throw new ServletException("something went awry");
+        }
+        DaoFactory.getUsersDao().all();
         request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 }

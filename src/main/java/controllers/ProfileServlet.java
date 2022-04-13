@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.DaoFactory;
+
 import models.Ad;
 import models.User;
 
@@ -42,6 +43,7 @@ public class ProfileServlet extends HttpServlet {
         }
         request.setAttribute("profileAds", profileAds);
         request.setAttribute("canEdit", canEdit);
+
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
