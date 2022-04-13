@@ -28,16 +28,15 @@ body {
 }
 
 #logo-index {
-    background-image: url('/img/logo.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    width: 150px;
+    width: auto;
     height: 75px;
 }
 
 #logo-login {
-    background-image: url('/img/logo.png');
+    background-image: url('/img/logo-login.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

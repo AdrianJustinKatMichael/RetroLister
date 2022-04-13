@@ -2,7 +2,7 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-black justify-content-center">
     <div class="container-fluid">
         <a class="navbar-brand" href="/index">
-            <div id="logo-index"></div>
+            <img  id="logo-index" src="/img/logo-pac.png">
         </a>
         <div class="">
             <div class="btn-group dropleft">
