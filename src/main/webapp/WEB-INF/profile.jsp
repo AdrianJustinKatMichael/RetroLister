@@ -37,8 +37,16 @@
                     <li class="list-group-item border-0 bg-light"><a
                             class="text-decoration-none text-dark">${profileUser.getUsername()}</a></li>
                     <c:if test='${canEdit.equals(true)}'>
-                        <li class="list-group-item border-0 bg-light">Edit information
-                        </li> <%-- open edit account modal --%>
+                        <li class="list-group-item border-0 bg-light">
+                            <button type="button" class="editUserButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                Edit account info
+                            </button>
+                        </li>
+                        <li class="list-group-item border-0 bg-light">
+                            <button type="button" class="deleteUserButton btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                                Delete account
+                            </button>
+                        </li>
                     </c:if>
                     <c:if test='${admin.equals("true")}'>
                         <li class="list-group-item border-0 bg-light"><a class="text-decoration-none text-dark"
@@ -82,37 +90,53 @@
 </div>
 
 <%-- modals go here --%>
-<%--    <form id="profile-form" class="col-9 bg-light d-flex flex-column justify-content-center p-5 rounded">--%>
-<%--        <div class="input-group mb-4">--%>
-<%--            <span class="input-group-text"><i class="fa fa-user"></i></span>--%>
-<%--            <input type="text" id="username" name="username" class="form-control shadow " placeholder="Username" value="${profileUser.getUsername()}">--%>
-<%--        </div>--%>
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="profile-form" class="col-9 bg-light d-flex flex-column justify-content-center p-5 rounded">
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        <input type="text" id="username" name="username" class="form-control shadow " placeholder="Username" value="${profileUser.getUsername()}">
+                    </div>
 
-<%--        <div class="input-group mb-4">--%>
-<%--            <span class="input-group-text"><i class="fa fa-envelope"></i></span>--%>
-<%--            <input type="email" id="email" name="email" class="form-control shadow" placeholder="Email" value="${profileUser.getEmail()}">--%>
-<%--        </div>--%>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        <input type="email" id="email" name="email" class="form-control shadow" placeholder="Email" value="${profileUser.getEmail()}">
+                    </div>
 
-<%--        <div class="input-group mb-4">--%>
-<%--            <span class="input-group-text"><i class="fa fa-lock"></i></span>--%>
-<%--            <input type="password" id="password-current" name="password-current" class="form-control shadow" placeholder="Enter current Password">--%>
-<%--        </div>--%>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="password-current" name="password-current" class="form-control shadow" placeholder="Enter current Password">
+                    </div>
 
-<%--        <div class="input-group mb-4">--%>
-<%--            <span class="input-group-text"><i class="fa fa-lock"></i></span>--%>
-<%--            <input type="password" id="password-new" name="password-new" class="form-control shadow" placeholder="Enter new Password">--%>
-<%--        </div>--%>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="password-new" name="password-new" class="form-control shadow" placeholder="Enter new Password">
+                    </div>
 
-<%--        <div class="input-group mb-4">--%>
-<%--            <span class="input-group-text"><i class="fa fa-lock"></i></span>--%>
-<%--            <input type="password" id="password-confirm" name="password-confirm" class="form-control shadow" placeholder="Confirm new Password">--%>
-<%--        </div>--%>
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="password-confirm" name="password-confirm" class="form-control shadow" placeholder="Confirm new Password">
+                    </div>
 
-<%--        <div class="d-flex justify-content-around pt-3">--%>
-<%--            <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">Update</button>--%>
-<%--            <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">Cancel</button>--%>
-<%--        </div>--%>
-<%--    </form>--%>
+<%--                    <div class="d-flex justify-content-around pt-3">--%>
+<%--                        <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">Update</button>--%>
+<%--                        <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">Cancel</button>--%>
+<%--                    </div>--%>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="editUserButton" class="btn btn-primary" data-bs-dismiss="modal" formaction="/profile" formmethod="post">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%--    <div class="row justify-content-center mb-4">--%>
 <%--        <div class="col-9 mt-4">--%>
