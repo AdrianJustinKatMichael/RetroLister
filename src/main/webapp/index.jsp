@@ -37,12 +37,12 @@
             </c:otherwise>
         </c:choose>
 
-        <div class="jumbotron jumbotron-fluid mb-4">
-            <img id="splash" src="https://via.placeholder.com/1200x300.png" />
+        <div class="jumbotron jumbotron-fluid mb-4 jumbo-shadow">
+            <img id="splash" src="img/splash.png" />
         </div>
 
         <c:if test="${not empty username}">
-            <div class="input-group w-75  mb-4 mx-auto p-2 border-0 bg-light">
+            <div class="input-group w-75  mb-4 mx-auto p-2 border-0 bg-light shadow">
                 <input type="text" class="form-control shadow-none" id="search-bar" placeholder="Title or Console">
                 <select class="custom-select" id="search-filter">
                     <option value="description" selected>Description</option>
@@ -60,7 +60,22 @@
             </div>
         </div>
 
-        <footer></footer>
+        <footer class="text-center text-white">
+            <div class="container pt-4">
+                <section class="mb-4">
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-facebook-f"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-twitter"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-google"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-instagram"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-linkedin"></i></a>
+                    <a class="btn btn-link btn-floating btn-lg text-light m-1" href="#!"><i class="fa fa-github"></i></a>
+                </section>
+            </div>
+            <div class="text-center text-light p-3">
+                © 2022 Copyright:
+                <a class="text-dark text-decoration-none" href="/index">RetroLister.com</a>
+            </div>
+        </footer>
 
         <%@ include file="WEB-INF/partials/foot.jsp" %>
         <script>
@@ -73,7 +88,7 @@
                 //--| Search-Bar: Functions
                 let buildAd = (ad) => {
                     let html = `
-                        <a class="card flex-row border-0 text-decoration-none" href="/ad?id=\${ad.id}">
+                        <a class="card flex-row border-0 text-decoration-none shadow" href="/ad?id=\${ad.id}">
                             <img class="" src="\${ad.imageUrl}"/>
                             <div class="card-body">
                                 <h3 class="card-title">\${ad.title}</h3>
