@@ -25,23 +25,28 @@ public class ProfileServlet extends HttpServlet {
         String username = user.getUsername();
         request.setAttribute("username", username);
         List<Ad> profileAds;
-        boolean canEdit = true;
+        boolean canEdit;
 
         if (request.getParameter("id") != null) {
             Long profileId = Long.valueOf(request.getParameter("id"));
+
             if (profileId == user.getId()) {
                 request.setAttribute("profileUser", user);
                 if (user.isAdmin()) request.setAttribute("admin", "true");
+                canEdit = true;
             } else {
                 User profileUser = DaoFactory.getUsersDao().findUserById(profileId);
                 request.setAttribute("profileUser", profileUser);
+                request.setAttribute("admin", "false");
                 canEdit = false;
             }
+
             profileAds = DaoFactory.getAdsDao().usersAds(profileId);
         } else {
             request.setAttribute("profileUser", user);
             if (user.isAdmin()) request.setAttribute("admin", "true");
             profileAds = DaoFactory.getAdsDao().usersAds(user.getId());
+            canEdit = true;
         }
 
         request.setAttribute("profileAds", profileAds);
@@ -51,6 +56,7 @@ public class ProfileServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         // update information or delete account
+
         // update your own ads or delete them
     }
 }
