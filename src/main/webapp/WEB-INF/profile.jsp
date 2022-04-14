@@ -186,17 +186,17 @@
                                 <div class="input-group mb-4">
                                     <span class="input-group-text"><i class="fa fa-pencil"></i></span>
                                     <input type="text" id="title" name="title" class="form-control shadow"
-                                           placeholder="Title" value="${title}">
+                                           placeholder="Title" value="title">
                                 </div>
                                 <div class="input-group mb-4">
                                     <span class="input-group-text"><i class="fa fa-pencil"></i></span>
                                     <input type="email" id="console" name="console" class="form-control shadow"
-                                           placeholder="Console" value="${console}">
+                                           placeholder="Console" value="console">
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fa fa-pencil"></i></span>
                                     <input type="text" id="ad-type" name="ad-type" class="form-control shadow"
-                                           placeholder="Ad Type" value="${ad-type}">
+                                           placeholder="Ad Type" value="ad-type">
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                             <div class="input-group mb-4">
                                 <span class="input-group-text"><i class="fa fa-pencil"></i></span>
                                 <textarea type="text" id="description" name="description" class="form-control shadow"
-                                          placeholder="Description" value="${description}"></textarea>
+                                          placeholder="Description" value="description"></textarea>
                             </div>
                         </div>
                         <%--                        <div class="row">--%>
