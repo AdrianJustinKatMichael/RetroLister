@@ -46,6 +46,13 @@ public class AdminServlet extends HttpServlet {
         else {
             throw new ServletException("something went awry");
         }
+
+//        this will keep the navbar recognizing our login status
+        if (request.getSession().getAttribute("user") != null) {
+            User user = (User) request.getSession().getAttribute("user");
+            String username = user.getUsername();
+            request.setAttribute("username", username);
+        }
         request.setAttribute("users", DaoFactory.getUsersDao().all());
         request.getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }

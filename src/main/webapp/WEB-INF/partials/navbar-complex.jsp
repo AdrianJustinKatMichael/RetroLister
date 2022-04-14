@@ -5,17 +5,17 @@
             <img  id="logo-index" src="/img/logo-pac.png">
         </a>
         <div class="">
-            <div class="btn-group dropleft">
-                <button class="btn bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            <div class="btn-group dropstart">
+                <button class="btn bg-transparent dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
                     <i class="px-1 fa fa-user text-white"></i>
                 </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/index">Home</a>
-                    <a class="dropdown-item" href="/profile">Profile</a>
-                    <a class="dropdown-item" href="/create-ad">Create Ad</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                </div>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/index">Home</a></li>
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/create-ad">Create Ad</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
             </div>
             <c:choose>
                 <c:when test="${not empty param.username}">
