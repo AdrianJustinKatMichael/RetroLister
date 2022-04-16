@@ -4,6 +4,7 @@ import dao.DaoFactory;
 
 import models.Ad;
 import models.User;
+import util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static util.Password.hash;
 
 @WebServlet(name = "ProfileServlet", urlPatterns = "/profile")
 public class ProfileServlet extends HttpServlet {
@@ -54,13 +57,34 @@ public class ProfileServlet extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // update information or delete account
+        User user = (User) request.getSession().getAttribute("user");
+        Long userId = user.getId();
         String updateUsername = request.getParameter("username");
         String updateEmail = request.getParameter("email");
         String currentPassword = request.getParameter("password");
-        String updatePassword = request.getParameter("password-new");
-        String confirmPassword = request.getParameter("password-confirm");
+        String newPassword = request.getParameter("password-new");
+        String confirmNewPass = request.getParameter("password-confirm");
+        String editUserButton = request.getParameter("editUserButton");
+
+        if (editUserButton != null) {
+            System.out.println("I'm working!");
+            if (updateUsername != null) {
+                System.out.println("still working!");
+                DaoFactory.getUsersDao().updateUsername(userId, updateUsername);
+                System.out.println("I'm working x2!");
+            }
+            if (updateEmail != null) {
+                System.out.println("I'm working! x3");
+                DaoFactory.getUsersDao().updateEmail(userId, updateEmail);
+                System.out.println(user.getEmail());
+                System.out.println("I'm working! x4");
+            }
+            System.out.println("I'm working still!");
+            response.sendRedirect("/login");
+            System.out.println("I'm still working! Now check the database!");
+        }
 
         /*
         *   When the form is submitted these String objects need to be executed

@@ -134,7 +134,7 @@ public class UsersDao implements Users {
         String query = "UPDATE users SET password = ? WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, hash(password));
+            stmt.setString(1, password);
             stmt.setLong(2, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
