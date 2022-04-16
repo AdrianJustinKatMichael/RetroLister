@@ -130,11 +130,11 @@ public class UsersDao implements Users {
     }
 
     @Override
-    public void updatePassword(Long id, String password) {
+    public void updatePassword(Long id, String newPassword) {
         String query = "UPDATE users SET password = ? WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, password);
+            stmt.setString(1, hash(newPassword));
             stmt.setLong(2, id);
             stmt.executeUpdate();
         } catch (SQLException e) {

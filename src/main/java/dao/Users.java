@@ -11,7 +11,7 @@ public interface Users {
     void update(Long id);
     void updateUsername(Long id, String username);
     void updateEmail(Long id, String email);
-    void updatePassword(Long id, String password);
+    void updatePassword(Long id, String newPassword);
     void deleteUser(Long id);
     List<User> all();
 }
