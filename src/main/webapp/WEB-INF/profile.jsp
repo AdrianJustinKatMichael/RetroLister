@@ -161,7 +161,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete account</button>
+                <form action="${pageContext.request.contextPath}/profile" method="post">
+                <button type="submit" class="btn btn-danger" name="delete-button" formaction="/profile"
+                        formmethod="post">Delete account</button>
+                </form>
             </div>
         </div>
     </div>

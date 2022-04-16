@@ -65,6 +65,7 @@ public class ProfileServlet extends HttpServlet {
         String newPassword = request.getParameter("password-new");
         String confirmNewPass = request.getParameter("password-confirm");
         String editUserButton = request.getParameter("editUserButton");
+        String deleteAccBtn = request.getParameter("delete-button");
 
         if (editUserButton != null) {
             if (updateUsername != null) { DaoFactory.getUsersDao().updateUsername(userId, updateUsername); }
@@ -74,6 +75,12 @@ public class ProfileServlet extends HttpServlet {
                     if (newPassword.equals(confirmNewPass)) { DaoFactory.getUsersDao().updatePassword(userId, newPassword); }
                 }
             }
+            response.sendRedirect("/login");
+        }
+
+        if (deleteAccBtn != null) {
+            DaoFactory.getUsersDao().deleteUser(userId);
+            request.getSession().invalidate(); // this is here to clear the session object and prevent issues
             response.sendRedirect("/login");
         }
 
