@@ -48,8 +48,8 @@
                 </div>
                 <div class="row d-flex justify-content-center align-items-center pt-2">
                     <form id="login-box" class="col-5 bg-light d-flex justify-content-center align-items-center px-5">
-                        Something something?
-                        <button type="submit" class="mx-2 btn btn-dark btn-sm" formaction="/register" formmethod="get">Submit</button>
+                        Don't have an account?<br>Join RetroLister today!
+                        <button type="submit" class="mx-2 btn btn-dark btn-sm" formaction="/register" formmethod="get">Register</button>
                     </form>
                 </div>
             </div>
