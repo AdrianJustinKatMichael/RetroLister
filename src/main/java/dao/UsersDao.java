@@ -158,6 +158,7 @@ public class UsersDao implements Users {
 
     @Override
     public void deleteUser(Long id) {
+        DaoFactory.getAdsDao().deleteByUserId(id); // deletes all ads created by user
         try {
             String query = "DELETE FROM users WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query);

@@ -75,13 +75,14 @@ public class ProfileServlet extends HttpServlet {
                     if (newPassword.equals(confirmNewPass)) { DaoFactory.getUsersDao().updatePassword(userId, newPassword); }
                 }
             }
-            response.sendRedirect("/login");
+            response.sendRedirect("/logout");
         }
 
         if (deleteAccBtn != null) {
             DaoFactory.getUsersDao().deleteUser(userId);
-            request.getSession().invalidate(); // this is here to clear the session object and prevent issues
-            response.sendRedirect("/login");
+//            request.getSession().invalidate(); // this is here to clear the session object and prevent issues
+            // logout will already invalidate the session
+            response.sendRedirect("/logout");
         }
 
         // update your own ads or delete them
