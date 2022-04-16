@@ -137,13 +137,13 @@
                         <input type="password" id="password-confirm" name="password-confirm" class="form-control shadow"
                                placeholder="Confirm new Password">
                     </div>
-                </form>
-            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="editUserButton" class="btn btn-primary" formaction="/profile"
+                <button type="submit" id="editUserButton" name="editUserButton" class="btn btn-primary" formaction="/profile"
                         formmethod="post">Update
                 </button>
+            </div>
+                </form>
             </div>
         </div>
     </div>
