@@ -56,6 +56,20 @@ public class ProfileServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         // update information or delete account
+        String updateUsername = request.getParameter("username");
+        String updateEmail = request.getParameter("email");
+        String currentPassword = request.getParameter("password");
+        String updatePassword = request.getParameter("password-new");
+        String confirmPassword = request.getParameter("password-confirm");
+
+        /*
+        *   When the form is submitted these String objects need to be executed
+        *   Updating to the database with the new values
+        *   Will need a multi-tier password-check conditional
+        *   (compare current pw to db pw; then update to confirm; if both pass; update pw to db)
+        *   Everything else will pass through update methods in UsersDao
+        *   Afterwards, redirect to /logout servlet
+        * */
 
         // update your own ads or delete them
     }
