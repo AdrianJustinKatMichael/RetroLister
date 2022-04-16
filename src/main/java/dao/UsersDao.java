@@ -103,6 +103,7 @@ public class UsersDao implements Users {
         }
     }
 
+    //    update profile methods
     @Override
     public void updateUsername(Long id, String username) {
         String query = "UPDATE users SET username = ? WHERE id = ?";
@@ -141,12 +142,7 @@ public class UsersDao implements Users {
             throw new RuntimeException("Error updating user.", e);
         }
     }
-
-    /*
-    *   From here I want to take these new update methods and execute them through the Profile servlet. ✅
-    *   Whenever the form is submitted, each parameter will be passed and executed.
-    *   When the form is executed it will redirect to the login page (both delete and update).
-    * */
+    // update profile methods end
 
     @Override
     public void update(Long id) {
