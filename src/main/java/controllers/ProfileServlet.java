@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import static util.Password.hash;
 
@@ -58,32 +59,43 @@ public class ProfileServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // update information or delete account
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user"); //using object to access the ID of the logged-in user
         Long userId = user.getId();
         String updateUsername = request.getParameter("username");
         String updateEmail = request.getParameter("email");
-        String currentPassword = request.getParameter("password");
+        String currentPassword = request.getParameter("password-current");
+        boolean validAttempt = Password.check(currentPassword, user.getPassword());
         String newPassword = request.getParameter("password-new");
         String confirmNewPass = request.getParameter("password-confirm");
         String editUserButton = request.getParameter("editUserButton");
 
         if (editUserButton != null) {
-            System.out.println("I'm working!");
+//            System.out.println("I'm working!");
             if (updateUsername != null) {
-                System.out.println("still working!");
+//                System.out.println("still working!");
                 DaoFactory.getUsersDao().updateUsername(userId, updateUsername);
-                System.out.println("I'm working x2!");
+//                System.out.println("I'm working x2!");
             }
             if (updateEmail != null) {
-                System.out.println("I'm working! x3");
+//                System.out.println("I'm working! x3");
                 DaoFactory.getUsersDao().updateEmail(userId, updateEmail);
-                System.out.println(user.getEmail());
-                System.out.println("I'm working! x4");
+//                System.out.println(user.getEmail());
+//                System.out.println("I'm working! x4");
             }
-            System.out.println("I'm working still!");
+            if (currentPassword != null) {
+                System.out.println("I can access the password field!");
+                if (validAttempt) {
+                    System.out.println("access 2nd password conditional!");
+                    if (newPassword.equals(confirmNewPass)) {
+                        System.out.println("access 3rd password conditional!");
+//                        DaoFactory.getUsersDao().updatePassword(userId, newPassword);
+//                        System.out.println("pushed new pass");
+                    }
+                }
+            }
+//            System.out.println("I'm working still!");
             response.sendRedirect("/login");
-            System.out.println("I'm still working! Now check the database!");
+//            System.out.println("I'm still working! Now check the database!");
         }
 
         /*
