@@ -84,7 +84,5 @@ public class ProfileServlet extends HttpServlet {
             // logout will already invalidate the session
             response.sendRedirect("/logout");
         }
-
-        // update your own ads or delete them
     }
 }
