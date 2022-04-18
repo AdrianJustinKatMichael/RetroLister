@@ -129,7 +129,7 @@ public class AdsDao implements Ads{
             stmt.setString(2, ad.getConsole());
             stmt.setString(3, ad.getDescription());
             stmt.setString(4, ad.getImageUrl());
-            stmt.setString(5, ad.getImageUrl());
+            stmt.setString(5, ad.getPostType());
             stmt.setLong(6, ad.getId());
             return stmt.executeUpdate();
         } catch (SQLException e) {

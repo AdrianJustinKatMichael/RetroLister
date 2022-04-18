@@ -64,33 +64,21 @@
             </div>
             <c:forEach var="ad" items="${profileAds}">
                 <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="${ad.getImageUrl()}" class="img-fluid rounded-start" alt="ad img">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <a class="text-decoration-none text-dark" href="/ad?id=${ad.id}">
+                    <a class="text-decoration-none text-dark" href="/ad?id=${ad.id}">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="${ad.getImageUrl()}" class="img-fluid rounded-start" alt="ad img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
                                     <h1 class="card-title">${ad.getTitle()}</h1>
                                     <h4 class="card-subtitle mb-2 text-muted">${ad.getConsole()}</h4>
                                     <p class="card-text">${ad.getDescription()}</p>
                                     <span class="text-muted text-right">Post: ${ad.getPostType()}</span>
-                                </a>
+                                </div>
                             </div>
                         </div>
-                        <c:if test='${canEdit.equals(true)}'>
-                            <div class="card-footer text-end">
-                                <button type="button" data-id="${ad.getId()}"
-                                        class="editAdButton btn btn-outline-success btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editAdModal">Edit
-                                </button>
-                                <button type="button" data-id="${ad.getId()}"
-                                        class="deleteAdButton btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteAdModal">Delete
-                                </button>
-                            </div>
-                        </c:if>
-                    </div>
+                    </a>
                 </div>
             </c:forEach>
         </div>
@@ -106,7 +94,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>WARNING: To update account information, you will be logged out and required to log back in with the newly updated information to see your changes.</p>
+                <p>WARNING: To update account information, you will be logged out and required to log back in with the
+                    newly updated information to see your changes.</p>
                 <form id="profile-form" class="row">
                     <div class="col-12 input-group mb-4">
                         <span class="input-group-text"><i class="fa fa-user"></i></span>
@@ -137,12 +126,13 @@
                         <input type="password" id="password-confirm" name="password-confirm" class="form-control shadow"
                                placeholder="Confirm new Password">
                     </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" id="editUserButton" name="editUserButton" class="btn btn-primary" formaction="/profile"
-                        formmethod="post">Update
-                </button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="editUserButton" name="editUserButton" class="btn btn-primary"
+                                formaction="/profile"
+                                formmethod="post">Update
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -162,103 +152,16 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <form action="${pageContext.request.contextPath}/profile" method="post">
-                <button type="submit" class="btn btn-danger" name="delete-button" formaction="/profile"
-                        formmethod="post">Delete account</button>
+                    <button type="submit" class="btn btn-danger" name="delete-button" formaction="/profile"
+                            formmethod="post">Delete account
+                    </button>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="editAdModal" tabindex="-1" aria-labelledby="editAdModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editAdModalLabel">Edit ad listing</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="ads-form bg-light p-5 rounded mb-4">
-                    <div class="container">
-                        <div class="row mb-5">
-                            <div class="col-5">
-                                <div>
-                                    <img src="https://via.placeholder.com/200x200.png"/>
-                                </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="input-group mb-4">
-                                    <span class="input-group-text"><i class="fa fa-pencil"></i></span>
-                                    <input type="text" id="title" name="title" class="form-control shadow"
-                                           placeholder="Title" value="title">
-                                </div>
-                                <div class="input-group mb-4">
-                                    <span class="input-group-text"><i class="fa fa-pencil"></i></span>
-                                    <input type="email" id="console" name="console" class="form-control shadow"
-                                           placeholder="Console" value="console">
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fa fa-pencil"></i></span>
-                                    <input type="text" id="ad-type" name="ad-type" class="form-control shadow"
-                                           placeholder="Ad Type" value="ad-type">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-group mb-4">
-                                <span class="input-group-text"><i class="fa fa-pencil"></i></span>
-                                <textarea type="text" id="description" name="description" class="form-control shadow"
-                                          placeholder="Description" value="description"></textarea>
-                            </div>
-                        </div>
-                        <%--                        <div class="row">--%>
-                        <%--                            <div class="d-flex justify-content-around pt-3">--%>
-                        <%--                                <button type="button" class="btn btn-light" value="Edit"><i--%>
-                        <%--                                        class="fa fa-pencil px-1"></i>Edit--%>
-                        <%--                                </button>--%>
-                        <%--                                <button type="button" class="btn btn-light" value="Edit"><i--%>
-                        <%--                                        class="fa fa-trash px-1"></i>Delete--%>
-                        <%--                                </button>--%>
-                        <%--                                <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">--%>
-                        <%--                                    Update--%>
-                        <%--                                </button>--%>
-                        <%--                                <button type="button" class="btn btn-dark" formaction="/profile" formmethod="post">--%>
-                        <%--                                    Cancel--%>
-                        <%--                                </button>--%>
-                        <%--                            </div>--%>
-                        <%--                        </div>--%>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="editAdButton" class="btn btn-primary" formaction="/profile" formmethod="post">
-                    Update
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="deleteAdModal" tabindex="-1" aria-labelledby="deleteAdModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteAdModalLabel">Delete ad?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you wish to delete this ad?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Delete ad</button>
             </div>
         </div>
     </div>
 </div>
 
 <%@ include file="partials/foot.jsp" %>
-<script>
 
-</script>
 </body>
 </html>
