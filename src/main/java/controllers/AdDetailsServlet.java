@@ -39,19 +39,19 @@ public class AdDetailsServlet extends HttpServlet{
     }
 
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String updateTitle = request.getParameter("updateTitle");
-        String updateConsole = request.getParameter("updateConsole");
-        String updateDescription = request.getParameter("updateDescription");
-        String imageUrl = GetPosters.getImagePoster(updateTitle);
-        String updatePostType = request.getParameter("updatePostType");
         Long adId = (Long) request.getSession().getAttribute("adId");
-        System.out.println(adId);
-        Ad adToChange = DaoFactory.getAdsDao().findAdById(adId);
-        long userId = adToChange.getUserId();
+
         String updateAdButton = request.getParameter("updateAdButton");
         String deleteAdButton = request.getParameter("deleteAdButton");
 
         if (updateAdButton != null) {
+            String updateTitle = request.getParameter("updateTitle");
+            String updateConsole = request.getParameter("updateConsole");
+            String updateDescription = request.getParameter("updateDescription");
+            String imageUrl = GetPosters.getImagePoster(updateTitle);
+            String updatePostType = request.getParameter("updatePostType");
+            Ad adToChange = DaoFactory.getAdsDao().findAdById(adId);
+            long userId = adToChange.getUserId();
             boolean inputHasErrors = updateTitle.isEmpty()
                     || updateConsole.isEmpty()
                     || updatePostType.isEmpty()

@@ -90,12 +90,12 @@
                                           placeholder="Description">${ad.getDescription()}</textarea>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="updateAdButton" class="btn btn-primary">
-                            Update
-                        </button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="updateAdButton" class="btn btn-primary">
+                                Update
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
