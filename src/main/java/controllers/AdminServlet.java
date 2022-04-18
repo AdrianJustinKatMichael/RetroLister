@@ -33,21 +33,12 @@ public class AdminServlet extends HttpServlet {
         String confirm = request.getParameter("delete");
 
         if (buttonDel != null) {
-            if (confirm.equals("yes")) {
-                DaoFactory.getUsersDao().deleteUser(Long.valueOf(userId));
-//                request.setAttribute("users", DaoFactory.getUsersDao().all());
-            }
+            if (confirm.equals("yes")) { DaoFactory.getUsersDao().deleteUser(Long.valueOf(userId)); }
         } else if (buttonPro != null) {
-            if (confirm.equals("yes")) {
-                DaoFactory.getUsersDao().update(Long.valueOf(userId));
-//                request.setAttribute("users", DaoFactory.getUsersDao().all());
-            }
-        }
-        else {
-            throw new ServletException("something went awry");
-        }
+            if (confirm.equals("yes")) { DaoFactory.getUsersDao().update(Long.valueOf(userId)); }
+        } else { throw new ServletException("something went awry"); }
 
-//        this will keep the navbar recognizing our login status
+//        this keeps the navbar recognition of login status
         if (request.getSession().getAttribute("user") != null) {
             User user = (User) request.getSession().getAttribute("user");
             String username = user.getUsername();
